@@ -11,4 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag obfusqf:$(date +%s)
+      env:
+        DOCKER_USERNAME: ${{ secrets.DockerUsername }}
+        DOCKER_PASSWORD: ${{ secrets.DockerPassword }}
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker build . --file Dockerfile --tag obfusqf:$(date +%s)
+        docker push jamieh/obfusqf:latest
