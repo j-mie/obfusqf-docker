@@ -16,5 +16,5 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DockerPassword }}
       run: |
         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        docker build . --file Dockerfile --tag obfusqf:$(date +%s)
+        docker build . --file Dockerfile --tag obfusqf:latest
         docker push jamieh/obfusqf:latest
